@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>น้ำหนักรวมไก่</title>
+
+  <style>
+
+@media print {
+
+  @page{
+    size:A4 portrait;
+    margin:5mm;
+  }
+
+  body{
+    zoom:70%;
+    background:white;
+  }
+
+  .container{
+    width:100%;
+    box-shadow:none;
+    padding:10px;
+  }
+
+  table{
+    font-size:10px;
+  }
+
+  th, td{
+    padding:3px;
+  }
+
+  input.weight{
+    font-size:10px;
+    padding:2px;
+  }
+
+  .buttons{
+    display:none;
+  }
+
+}
+    body{
+      font-family: "Sarabun", sans-serif;
+      background:#f5f7fa;
+      margin:0;
+      padding:20px;
+      color:#333;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:auto;
+      background:white;
+      border-radius:20px;
+      padding:25px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h1{
+      text-align:center;
+      color:#2563eb;
+      margin-bottom:20px;
+    }
+
+    .top-form{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap:15px;
+      margin-bottom:25px;
+    }
+
+.top-form input{
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:10px;
+  font-size:16px;
+  outline: none;
+}
+    }
+
+    .summary{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+      gap:15px;
+      margin-bottom:20px;
+    }
+
+    .card{
+      background:#2563eb;
+      color:white;
+      padding:20px;
+      border-radius:15px;
+      text-align:center;
+    }
+
+    .card h2{
+      margin:0;
+      font-size:32px;
+    }
+
+    .card p{
+      margin-top:8px;
+      font-size:16px;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:10px;
+    }
+
+    th, td{
+      border:1px solid #ddd;
+      padding:10px;
+      text-align:center;
+    }
+
+    th{
+      background:#0f766e;
+      color:white;
+    }
+
+    input.weight{
+      width:100%;
+      padding:8px;
+      text-align:center;
+      border:none;
+      outline:none;
+      font-size:16px;
+    }
+
+    .buttons{
+      margin-top:20px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    button{
+      padding:12px 20px;
+      border:none;
+      border-radius:10px;
+      font-size:16px;
+      cursor:pointer;
+      color:white;
+    }
+
+    .save{
+      background:#0ea5e9;
+    }
+
+    .clear{
+      background:#dc2626;
+    }
+
+    .print{
+      background:#2563eb;
+    }
+@media print {
+
+  @page{
+    size:A4 portrait;
+    margin:5mm;
+  }
+
+  body{
+    background:white;
+    zoom:65%;
+  }
+
+  .container{
+    width:100%;
+    padding:10px;
+    box-shadow:none;
+  }
+
+  h1{
+    font-size:22px;
+    margin-bottom:10px;
+  }
+
+  .top-form{
+    gap:5px;
+    margin-bottom:10px;
+  }
+
+  .top-form input{
+    padding:5px;
+    font-size:11px;
+  }
+
+  table{
+    font-size:9px;
+  }
+
+  th, td{
+    padding:2px;
+  }
+
+  input.weight{
+    font-size:9px;
+    padding:1px;
+  }
+
+  .summary{
+    margin-bottom:8px;
+  }
+
+  .card{
+    padding:8px;
+  }
+
+  .card h2{
+    font-size:20px;
+  }
+
+  .buttons{
+    display:none;
+  }
+
+}
+   
+      }
+
+      body{
+        background:white;
+      }
+
+      .container{
+        box-shadow:none;
+      }
+    }
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+}
+
+th{
+  background:#2563eb;
+  color:white;
+  padding:8px;
+  font-size:14px;
+}
+
+td{
+  border:1px solid #ddd;
+  text-align:center;
+  padding:4px;
+}
+
+input.weight{
+  width:90%;
+  padding:6px;
+  border:1px solid #ddd;
+  border-radius:6px;
+  text-align:center;
+  font-size:14px;
+}
+/* ซ่อนปุ่ม up/down ใน Chrome, Edge, Safari */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ซ่อนปุ่ม up/down ใน Firefox */
+input[type=number]{
+  -moz-appearance: textfield;
+}
+  </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>น้ำหนักไก่</h1>
+
+  <div class="top-form">
+    <input type="text" placeholder="ชื่อลูกค้า">
+    <input type="text" placeholder="สินค้า">
+    <input type="date">
+    <input type="text" placeholder="เลขที่">
+  </div>
+
+    <div class="summary">
+
+  <div class="card">
+    <h2 id="totalWeight">0</h2>
+    <p>น้ำหนักรวม (กิโลกรัม)</p>
+  </div>
+
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>ลำดับ</th>
+      <th>น้ำหนัก (กิโลกรัม)</th>
+
+      <th>ลำดับ</th>
+      <th>น้ำหนัก (กิโลกรัม)</th>
+
+      <th>ลำดับ</th>
+      <th>น้ำหนัก (กิโลกรัม)</th>
+
+      <th>ลำดับ</th>
+      <th>น้ำหนัก (กิโลกรัม)</th>
+
+      <th>ลำดับ</th>
+      <th>น้ำหนัก (กิโลกรัม)</th>
+    </tr>
+  </thead>
+
+  <tbody id="tableBody"></tbody>
+</table>
+
+
+  <div class="buttons">
+    <button class="save" onclick="downloadPDF()">Export PDF</button>
+    <button class="print" onclick="window.print()">พิมพ์</button>
+    <button class="clear" onclick="clearData()">ล้างข้อมูล</button>
+
+  </div>
+
+</div>
+
+<script>
+
+const tableBody = document.getElementById("tableBody");
+for(let i = 1; i <= 30; i++){
+
+  let row = "<tr>";
+
+  for(let col = 0; col < 5; col++){
+
+    let number = i + (col * 30);
+
+    row += `
+      <td>${number}</td>
+
+      <td>
+        <input
+          type="number"
+          class="weight"
+          placeholder="0"
+          oninput="calculate()"
+        >
+      </td>
+    `;
+  }
+
+  row += "</tr>";
+
+  tableBody.innerHTML += row;
+}
+
+function calculate(){
+
+  const weights = document.querySelectorAll(".weight");
+
+  let total = 0;
+
+  weights.forEach(input => {
+
+    const value = parseFloat(input.value);
+
+    if(!isNaN(value)){
+      total += value;
+    }
+
+  });
+document.getElementById("totalWeight").innerText =
+  total.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
+function clearData(){
+
+  const weights = document.querySelectorAll(".weight");
+
+  weights.forEach(input => {
+    input.value = "";
+  });
+
+  calculate();
+
+}
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+</body>
+</html>
