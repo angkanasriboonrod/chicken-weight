@@ -139,109 +139,24 @@ button{
 
 /* พิมพ์ A4 */
 
-@media print {
+@media print{
 
-  @page{
-    size:A4 portrait;
-    margin:5mm;
-  }
-
-  body{
-    background:white;
-    zoom:65%;
-  }
-
-  .container{
-    width:100%;
-    padding:10px;
-    box-shadow:none;
-  }
-
-  h1{
-    font-size:22px;
-    margin-bottom:10px;
-  }
-
-  .top-form{
-    gap:5px;
-    margin-bottom:10px;
-  }
-
-  .top-form input{
-    padding:5px;
-    font-size:11px;
-  }
-
-  table{
-    font-size:9px;
-  }
-
-  th, td{
-    padding:2px;
-  }
-
-  input.weight{
-    font-size:9px;
-    padding:1px;
-  }
-
-  .summary{
-    margin-bottom:8px;
-  }
-
-  .card{
-    padding:8px;
-  }
-
-  .card h2{
-    font-size:20px;
-  }
-
-  .buttons{
-    display:none;
-  }
-
-}
-   
-      }
-
-      body{
-        background:white;
-      }
-
-      .container{
-        box-shadow:none;
-      }
+    @page{
+        size:A4 portrait;
+        margin:5mm;
     }
-table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:15px;
+
+    body{
+        zoom:65%;
+        background:white;
+    }
+
+    .buttons{
+        display:none;
+    }
+
 }
 
-th{
-  background:#2563eb;
-  color:white;
-  padding:8px;
-  font-size:14px;
-}
-
-td{
-  border:1px solid #ddd;
-  text-align:center;
-  padding:4px;
-}
-
-input.weight{
-  width:90%;
-  padding:6px;
-  border:1px solid #ddd;
-  border-radius:6px;
-  text-align:center;
-  font-size:14px;
-}
-
-  
 </style>
 </head>
 
@@ -257,8 +172,10 @@ input.weight{
 
     <select>
         <option value="">สินค้า</option>
-        <option>ไก่ไข่</option>
-    
+        <option>ไก่สด</option>
+        <option>ไก่บ้าน</option>
+        <option>อกไก่</option>
+        <option>น่องไก่</option>
     </select>
 
     <input type="date">
@@ -377,6 +294,7 @@ function calculate(){
     });
 
 }
+
 function moveNext(event){
 
     if(event.key === "Enter"){
@@ -398,7 +316,6 @@ function moveNext(event){
     }
 
 }
-
 function clearData(){
 
     const inputs = document.querySelectorAll(".weight");
@@ -418,53 +335,34 @@ function printPage(){
     },300);
 
 }
+
 function downloadPDF(){
 
     const element = document.getElementById("printArea");
 
     const opt = {
 
-        margin: 0,
+        margin:0.2,
+        filename:'chicken-weight.pdf',
 
-        filename: 'chicken-weight.pdf',
-
-        image: {
-            type: 'jpeg',
-            quality: 1
+        image:{
+            type:'jpeg',
+            quality:1
         },
 
-        html2canvas: {
-            scale: 2,
-            scrollY: 0
+        html2canvas:{
+            scale:2
         },
 
-        jsPDF: {
-            unit: 'mm',
-            format: 'a4',
-            orientation: 'portrait'
-        },
-
-        pagebreak: {
-            mode: ['avoid-all']
+        jsPDF:{
+            unit:'in',
+            format:'a4',
+            orientation:'portrait'
         }
 
     };
 
-    html2pdf()
-    .set(opt)
-    .from(element)
-    .toPdf()
-    .get('pdf')
-    .then(function(pdf){
-
-        const totalPages = pdf.internal.getNumberOfPages();
-
-        for(let i = totalPages; i > 1; i--){
-            pdf.deletePage(i);
-        }
-
-    })
-    .save();
+    html2pdf().set(opt).from(element).save();
 
 }
 
