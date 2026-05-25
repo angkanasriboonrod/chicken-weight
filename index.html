@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <title>น้ำหนักไก่</title>
 
@@ -10,119 +13,243 @@
 
 <style>
 
-body{
-    font-family: sans-serif;
-    background:#e5e7eb;
-    margin:0;
-    padding:20px;
+*{
+    box-sizing:border-box;
 }
 
-.container{
-    max-width:1200px;
-    margin:auto;
-    background:white;
-    border-radius:15px;
-    padding:20px;
+body{
+
+    margin:0;
+    padding:0;
+
+    background:#e5e7eb;
+
+    font-family:sans-serif;
+
 }
+
+/* ===== A4 ===== */
+#printArea{
+
+    width:200mm;
+    min-height:287mm;
+
+    background:white;
+
+    margin:auto;
+
+    padding:3mm;
+
+    overflow:hidden;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/* ===== TITLE ===== */
 
 h1{
+
+    margin:0 0 8px 0;
+
     text-align:center;
+
     color:#2563eb;
-    margin-bottom:20px;
+
+    font-size:22px;
+
+    flex-shrink:0;
+
 }
 
+/* ===== FORM ===== */
+
 .top-form{
+
     display:grid;
+
     grid-template-columns:repeat(4,1fr);
-    gap:10px;
-    margin-bottom:15px;
+
+    gap:6px;
+
+    margin-bottom:6px;
+
+    flex-shrink:0;
+
 }
 
 .top-form input,
 .top-form select{
-    padding:10px;
+
+    width:100%;
+
+    padding:6px;
+
     border:1px solid #ccc;
-    border-radius:6px;
-    font-size:14px;
-    outline:none;
+
+    border-radius:4px;
+
+    font-size:12px;
+
 }
 
-.top-form input:focus,
-.top-form select:focus{
-    border:1px solid #2563eb;
-}
+/* ===== SUMMARY ===== */
 
 .summary{
+
     background:#2563eb;
+
     color:white;
+
+    border-radius:8px;
+
     text-align:center;
-    border-radius:10px;
-    padding:15px;
-    margin-bottom:15px;
+
+    padding:6px;
+
+    margin-bottom:6px;
+
+    flex-shrink:0;
+
 }
 
 .summary h2{
+
     margin:0;
-    font-size:34px;
+
+    font-size:26px;
+
 }
 
 .summary p{
-    margin:5px 0 0;
-    font-size:14px;
+
+    margin:2px 0 0 0;
+
+    font-size:12px;
+
 }
+
+/* ===== TABLE ===== */
 
 table{
+
     width:100%;
+
     border-collapse:collapse;
+
+    table-layout:fixed;
+
+    flex:1;
+
 }
+
+/* ===== HEADER ===== */
 
 th{
+
     background:#2563eb;
+
     color:white;
-    padding:6px;
-    font-size:12px;
+
+    border:1px solid #ddd;
+
+    font-size:10px;
+
+    padding:2px;
+
+    height:22px;
+
 }
+
+/* ===== CELLS ===== */
 
 td{
+
     border:1px solid #ddd;
-    padding:3px;
+
     text-align:center;
-    font-size:12px;
+
+    padding:1px;
+
+    height:25px;
+
+    font-size:10px;
+
 }
+
+/* ===== NUMBER COLUMN ===== */
+
+th:nth-child(odd),
+td:nth-child(odd){
+
+    width:28px;
+
+}
+
+/* ===== INPUT ===== */
 
 input.weight{
-    width:90%;
-    padding:4px;
+
+    width:98%;
+
+    height:20px;
+
     border:1px solid #ccc;
-    border-radius:4px;
+
+    border-radius:3px;
+
     text-align:center;
+
+    font-size:10px;
+
+    padding:0;
+
 }
 
-/* ซ่อน up/down */
+/* ===== HIDE SPIN ===== */
 
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button{
+
     -webkit-appearance:none;
     margin:0;
+
 }
 
 input[type=number]{
+
     -moz-appearance:textfield;
+
 }
 
+/* ===== BUTTON ===== */
+
 .buttons{
-    margin-top:15px;
+
+    margin:10px auto;
+
     display:flex;
+
     gap:10px;
+
+    justify-content:center;
+
 }
 
 button{
+
     border:none;
-    padding:10px 16px;
+
     color:white;
+
+    padding:10px 16px;
+
     border-radius:6px;
+
     cursor:pointer;
-    font-size:13px;
+
 }
 
 .pdf{
@@ -137,103 +264,130 @@ button{
     background:#dc2626;
 }
 
-/* พิมพ์ A4 */
+/* ===== PRINT ===== */
 
 @media print{
 
     @page{
+
         size:A4 portrait;
-        margin:5mm;
+        margin:0;
+
     }
 
     body{
-        zoom:65%;
+
         background:white;
+
     }
 
     .buttons{
+
         display:none;
+
     }
 
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div class="container" id="printArea">
+<div id="printArea">
 
 <h1>น้ำหนักไก่</h1>
 
 <div class="top-form">
 
-    <input type="text" placeholder="ชื่อลูกค้า">
+<input type="text" placeholder="ชื่อลูกค้า">
 
-    <select>
-        <option value="">สินค้า</option>
-        <option>ไก่</option>
-        </select>
+<select>
 
-    <input type="date">
+<option>ไก่ไข่</option>
 
-    <input type="text" placeholder="เลขที่">
+</select>
+
+<input type="date">
+
+<input type="text" placeholder="เลขที่">
 
 </div>
 
 <div class="summary">
-    <h2 id="totalWeight">0.00</h2>
-    <p>น้ำหนักรวม (กิโลกรัม)</p>
+
+<h2 id="totalWeight">0.00</h2>
+
+<p>น้ำหนักรวม (กิโลกรัม)</p>
+
 </div>
 
 <table>
 
 <thead>
+
 <tr>
 
 <th>ลำดับ</th>
-<th>น้ำหนัก (กิโลกรัม)</th>
+<th>น้ำหนัก</th>
 
 <th>ลำดับ</th>
-<th>น้ำหนัก (กิโลกรัม)</th>
+<th>น้ำหนัก</th>
 
 <th>ลำดับ</th>
-<th>น้ำหนัก (กิโลกรัม)</th>
+<th>น้ำหนัก</th>
 
 <th>ลำดับ</th>
-<th>น้ำหนัก (กิโลกรัม)</th>
+<th>น้ำหนัก</th>
 
 <th>ลำดับ</th>
-<th>น้ำหนัก (กิโลกรัม)</th>
+<th>น้ำหนัก</th>
 
 </tr>
+
 </thead>
 
 <tbody id="tableBody"></tbody>
 
 </table>
 
+</div>
+
 <div class="buttons">
 
-<button class="pdf" onclick="downloadPDF()">
+<button
+class="pdf"
+onclick="downloadPDF()">
+
 Export PDF
+
 </button>
 
-<button class="print" onclick="printPage()">
+<button
+class="print"
+onclick="window.print()">
+
 พิมพ์
+
 </button>
 
-<button class="clear" onclick="clearData()">
+<button
+class="clear"
+onclick="clearData()">
+
 ล้างข้อมูล
-</button>
 
-</div>
+</button>
 
 </div>
 
 <script>
 
-const tableBody = document.getElementById("tableBody");
+const tableBody =
+document.getElementById("tableBody");
+
+/* ===== CREATE TABLE ===== */
 
 for(let i=1;i<=30;i++){
 
@@ -241,7 +395,8 @@ for(let i=1;i<=30;i++){
 
     for(let col=0;col<5;col++){
 
-        let number = i + (col*30);
+        const number =
+        i + (col*30);
 
         row += `
 
@@ -249,48 +404,53 @@ for(let i=1;i<=30;i++){
 
         <td>
 
-            <input
-                type="number"
-                class="weight"
-                placeholder="0"
-                step="0.01"
-                oninput="calculate()"
-                onkeydown="moveNext(event)"
-            >
+        <input
+        type="number"
+        class="weight"
+        step="0.01"
+        oninput="calculate()"
+        onkeydown="moveNext(event)">
 
         </td>
 
         `;
+
     }
 
     row += "</tr>";
 
     tableBody.innerHTML += row;
+
 }
+
+/* ===== CALCULATE ===== */
 
 function calculate(){
 
-    const weights = document.querySelectorAll(".weight");
+    const weights =
+    document.querySelectorAll(".weight");
 
     let total = 0;
 
-    weights.forEach(input => {
+    weights.forEach(input=>{
 
-        const value = parseFloat(input.value);
+        const value =
+        parseFloat(input.value);
 
         if(!isNaN(value)){
+
             total += value;
+
         }
 
     });
 
-    document.getElementById("totalWeight").innerText =
-    total.toLocaleString('en-US',{
-        minimumFractionDigits:2,
-        maximumFractionDigits:2
-    });
+    document.getElementById("totalWeight")
+    .innerText = total.toFixed(2);
 
 }
+
+/* ===== ENTER NEXT ===== */
 
 function moveNext(event){
 
@@ -298,11 +458,15 @@ function moveNext(event){
 
         event.preventDefault();
 
-        const inputs = document.querySelectorAll(".weight");
+        const inputs =
+        document.querySelectorAll(".weight");
 
-        const index = Array.from(inputs).indexOf(event.target);
+        const index =
+        Array.from(inputs)
+        .indexOf(event.target);
 
-        const nextIndex = index + 5;
+        const nextIndex =
+        index + 5;
 
         if(nextIndex < inputs.length){
 
@@ -313,53 +477,80 @@ function moveNext(event){
     }
 
 }
+
+/* ===== CLEAR ===== */
+
 function clearData(){
 
-    const inputs = document.querySelectorAll(".weight");
+    document
+    .querySelectorAll(".weight")
+    .forEach(input=>{
 
-    inputs.forEach(input => {
         input.value = "";
+
     });
 
     calculate();
 
 }
 
-function printPage(){
+/* ===== EXPORT PDF ===== */
 
-    setTimeout(() => {
-        window.print();
-    },300);
+async function downloadPDF(){
 
-}
+    const element =
+    document.getElementById("printArea");
 
-function downloadPDF(){
+    // ตรวจสอบขนาดก่อน export
+    const rect =
+    element.getBoundingClientRect();
 
-    const element = document.getElementById("printArea");
+    console.log("WIDTH:",rect.width);
+    console.log("HEIGHT:",rect.height);
 
     const opt = {
 
-        margin:0.2,
-        filename:'chicken-weight.pdf',
+        margin:0,
+
+        filename:"chicken-weight.pdf",
 
         image:{
-            type:'jpeg',
+            type:"jpeg",
             quality:1
         },
 
         html2canvas:{
-            scale:2
+
+            scale:2.2,
+
+            useCORS:true,
+
+            scrollX:0,
+
+            scrollY:0
+
         },
 
         jsPDF:{
-            unit:'in',
-            format:'a4',
-            orientation:'portrait'
+
+            unit:"mm",
+
+            format:"a4",
+
+            orientation:"portrait"
+
+        },
+
+        pagebreak:{
+            mode:[]
         }
 
     };
 
-    html2pdf().set(opt).from(element).save();
+    await html2pdf()
+    .set(opt)
+    .from(element)
+    .save();
 
 }
 
